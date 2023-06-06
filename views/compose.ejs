@@ -1,16 +1,28 @@
 <%- include('partials/header'); %>
 
-    <h1>Compose</h1>
-    <form action="/compose" method="post">
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" name="postTitle" class="form-control" placeholder="please enter the title here..." />
+<h1>Compose</h1>
+<form action="/compose" method="post">
+  <div class="form-group">
+    <label>Title</label>
+    <input
+      type="text"
+      name="postTitle"
+      class="form-control"
+      placeholder="please enter the title here..."
+    />
 
-            <label>Post</label>
-            <textarea name="postBody" cols="30" rows="8" class="form-control" placeholder="please enter the content here..."></textarea>
-        </div>
+    <label>Post</label>
+    <textarea
+      name="postBody"
+      cols="30"
+      rows="8"
+      class="form-control"
+      placeholder="please enter the content here..."
+    ></textarea>
+  </div>
 
-        <button class="btn btn-primary" type="submit" name="button">Publish</button>
-    </form>
+  <button class="btn btn-primary" type="submit" name="button">Publish</button>
+</form>
 
-    <%- include('partials/footer'); %>
+
+ <%- include('partials/footer'); %>

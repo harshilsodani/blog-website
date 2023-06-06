@@ -38,11 +38,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 mongoose.connect(
-  "mongodb+srv://" +
+  'mongodb+srv://' +
     username +
-    ":" +
+    ':' +
     password +
-    "@cluster0.6dluecf.mongodb.net/blogDB",
+    '@cluster0.6dluecf.mongodb.net/blogDB',
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
@@ -90,6 +90,10 @@ app.get('/posts/:postId', async function (req, res) {
   try {
     const post = await Post.findOne({ _id: requestedPostId });
 
+    if (!post) {
+      return res.render('error', { message: 'Article dose not exist!' });
+    }
+
     res.render('post', {
       title: post.title,
       content: post.content,
@@ -106,6 +110,13 @@ app.post('/compose', async function (req, res) {
   });
 
   try {
+    if (!post.title || !post.content) {
+      res.send(
+        '<script>alert("Please enter both title and content"); window.location="/compose";</script>'
+      );
+      return res.render('compose');
+    }
+
     await post.save();
     res.redirect('/');
     console.log('successfully saved');
