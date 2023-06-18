@@ -20,6 +20,10 @@ html {
   color: #1abc9c !important;
 }
 
+.content{
+  white-space: pre-line;
+}
+
 .footer-padding {
   padding-bottom: 75px;
 }
