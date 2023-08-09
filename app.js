@@ -1,27 +1,27 @@
-const express = require('express');
-const ejs = require('ejs');
-const mongoose = require('mongoose');
-const _ = require('lodash');
-const { Db } = require('mongodb');
+const express = require("express");
+const ejs = require("ejs");
+const mongoose = require("mongoose");
+const _ = require("lodash");
+const { Db } = require("mongodb");
 const PORT = process.env.PORT || 3000;
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 
 const homeStartingContent =
-  'Welcome to DIGIVARTA, where technology meets inspiration! Dive into a world of innovation, knowledge, and endless possibilities. Explore captivating articles, expert analysis, and thought-provoking insights that unravel the mysteries of the tech universe. From the latest gadgets to groundbreaking advancements, we cover it all. Join our community of tech enthusiasts, entrepreneurs, and visionaries to embark on a journey of discovery. Discover the artistry behind coding, the marvels of AI, and the transformative power of digital disruption. Fuel your curiosity, ignite your passion, and unlock a world of digital wonders. Welcome to Digivarta - Where Tech Transforms and Inspires!';
+  "Welcome to DIGIVARTA, where technology meets inspiration! Dive into a world of innovation, knowledge, and endless possibilities. Explore captivating articles, expert analysis, and thought-provoking insights that unravel the mysteries of the tech universe. From the latest gadgets to groundbreaking advancements, we cover it all. Join our community of tech enthusiasts, entrepreneurs, and visionaries to embark on a journey of discovery. Discover the artistry behind coding, the marvels of AI, and the transformative power of digital disruption. Fuel your curiosity, ignite your passion, and unlock a world of digital wonders. Welcome to Digivarta - Where Tech Transforms and Inspires!";
 
 const aboutContent = [
   "Welcome to Digivarta, an endeavor fueled by my passion for technology. I'm Harshil Sodani, a dedicated third-year student pursuing a Bachelor of Technology in Computer Science from SKIT Jaipur. As the sole member of this tech-driven journey, I aim to share my knowledge and insights with fellow tech enthusiasts like you.",
-  'Digivarta is a space where I explore the ever-evolving world of technology, unraveling its mysteries and showcasing its transformative power. Through engaging articles, informative tutorials, and curated resources, my goal is to bridge the gap between theory and practical application.',
+  "Digivarta is a space where I explore the ever-evolving world of technology, unraveling its mysteries and showcasing its transformative power. Through engaging articles, informative tutorials, and curated resources, my goal is to bridge the gap between theory and practical application.",
   "Join me on this exhilarating adventure as we dive into the realms of programming, artificial intelligence, and the latest tech trends. Together, let's embrace a future where technology knows no bounds.",
-  'Welcome to Digivarta, where technology meets inspiration!',
+  "Welcome to Digivarta, where technology meets inspiration!",
 ];
 
 const contactContent = [
-  'We would love to hear from you! Whether you have questions, feedback, or simply want to connect, feel free to reach out using the contact information provided below. Your thoughts and inquiries are important to us, and we strive to respond as promptly as possible.',
+  "We would love to hear from you! Whether you have questions, feedback, or simply want to connect, feel free to reach out using the contact information provided below. Your thoughts and inquiries are important to us, and we strive to respond as promptly as possible.",
 
-  'Email: [email protected]',
-  'Phone: +1-123-456-7890',
+  "Email: [email protected]",
+  "Phone: +1-123-456-7890",
 
   "Please don't hesitate to get in touch with us. We value your engagement and look forward to the opportunity to connect with fellow tech enthusiasts like yourself.",
 
@@ -32,21 +32,21 @@ const app = express();
 
 let posts = [];
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 mongoose.connect(
-  'mongodb+srv://' +
+  "mongodb+srv://" +
     username +
-    ':' +
+    ":" +
     password +
-    '@cluster0.6dluecf.mongodb.net/blogDB',
+    "@cluster0.6dluecf.mongodb.net/blogDB",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
-// mongoose.connect('mongodb://127.0.0.1:27017/blogDB', {
+// mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
@@ -56,14 +56,14 @@ const postSchema = new mongoose.Schema({
   content: { type: String, required: true },
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model("Post", postSchema);
 
-app.get('/', async function (req, res) {
+app.get("/", async function (req, res) {
   try {
     posts = [];
     posts = await Post.find();
 
-    res.render('home', {
+    res.render("home", {
       startingContent: homeStartingContent,
       posts: posts,
     });
@@ -72,29 +72,29 @@ app.get('/', async function (req, res) {
   }
 });
 
-app.get('/about', function (req, res) {
-  res.render('about', { paragraphs: aboutContent });
+app.get("/about", function (req, res) {
+  res.render("about", { paragraphs: aboutContent });
 });
 
-app.get('/contact', function (req, res) {
-  res.render('contact', { paragraphs: contactContent });
+app.get("/contact", function (req, res) {
+  res.render("contact", { paragraphs: contactContent });
 });
 
-app.get('/compose', function (req, res) {
-  res.render('compose');
+app.get("/compose", function (req, res) {
+  res.render("compose");
 });
 
-app.get('/posts/:postId', async function (req, res) {
+app.get("/posts/:postId", async function (req, res) {
   const requestedPostId = req.params.postId;
 
   try {
     const post = await Post.findOne({ _id: requestedPostId });
 
     if (!post) {
-      return res.render('error', { message: 'Article dose not exist!' });
+      return res.render("error", { message: "Article dose not exist!" });
     }
 
-    res.render('post', {
+    res.render("post", {
       title: post.title,
       content: post.content,
     });
@@ -103,7 +103,7 @@ app.get('/posts/:postId', async function (req, res) {
   }
 });
 
-app.post('/compose', async function (req, res) {
+app.post("/compose", async function (req, res) {
   const post = new Post({
     title: req.body.postTitle,
     content: req.body.postBody,
@@ -114,12 +114,12 @@ app.post('/compose', async function (req, res) {
       res.send(
         '<script>alert("Please enter both title and content"); window.location="/compose";</script>'
       );
-      return res.render('compose');
+      return res.render("compose");
     }
 
     await post.save();
-    res.redirect('/');
-    console.log('successfully saved');
+    res.redirect("/");
+    console.log("successfully saved");
   } catch (err) {
     console.log(err);
   }
