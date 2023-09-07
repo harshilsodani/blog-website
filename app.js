@@ -5,8 +5,8 @@ const _ = require("lodash");
 const PORT = process.env.PORT || 3000;
 
 // database credentials
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = process.env.USERNAME;
+const DB_PASSWORD = process.env.PASSWORD;
 
 const homeStartingContent =
   "Welcome to DIGIVARTA, where technology meets inspiration! Dive into a world of innovation, knowledge, and endless possibilities. Explore captivating articles, expert analysis, and thought-provoking insights that unravel the mysteries of the tech universe. From the latest gadgets to groundbreaking advancements, we cover it all. Join our community of tech enthusiasts, entrepreneurs, and visionaries to embark on a journey of discovery. Discover the artistry behind coding, the marvels of AI, and the transformative power of digital disruption. Fuel your curiosity, ignite your passion, and unlock a world of digital wonders. Welcome to Digivarta - Where Tech Transforms and Inspires!";
