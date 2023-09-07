@@ -1,11 +1,12 @@
 const express = require("express");
-const ejs = require("ejs");
 const mongoose = require("mongoose");
+const ejs = require("ejs");
 const _ = require("lodash");
-const { Db } = require("mongodb");
 const PORT = process.env.PORT || 3000;
-const username = process.env.USERNAME;
-const password = process.env.PASSWORD;
+
+// database credentials
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
 
 const homeStartingContent =
   "Welcome to DIGIVARTA, where technology meets inspiration! Dive into a world of innovation, knowledge, and endless possibilities. Explore captivating articles, expert analysis, and thought-provoking insights that unravel the mysteries of the tech universe. From the latest gadgets to groundbreaking advancements, we cover it all. Join our community of tech enthusiasts, entrepreneurs, and visionaries to embark on a journey of discovery. Discover the artistry behind coding, the marvels of AI, and the transformative power of digital disruption. Fuel your curiosity, ignite your passion, and unlock a world of digital wonders. Welcome to Digivarta - Where Tech Transforms and Inspires!";
@@ -39,9 +40,9 @@ app.use(express.static("public"));
 
 mongoose.connect(
   "mongodb+srv://" +
-    username +
+    DB_USERNAME +
     ":" +
-    password +
+    DB_PASSWORD +
     "@cluster0.6dluecf.mongodb.net/blogDB",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
@@ -54,6 +55,9 @@ mongoose.connect(
 const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
+  author: { type: String, required: true },
+  password: { type: String, required: true },
+  date: { type: Date, default: Date.now },
 });
 
 const Post = mongoose.model("Post", postSchema);
@@ -95,8 +99,7 @@ app.get("/posts/:postId", async function (req, res) {
     }
 
     res.render("post", {
-      title: post.title,
-      content: post.content,
+      post: post,
     });
   } catch (err) {
     console.log(err);
@@ -107,12 +110,15 @@ app.post("/compose", async function (req, res) {
   const post = new Post({
     title: req.body.postTitle,
     content: req.body.postBody,
+    author: req.body.authorTitle,
+    password: req.body.passwordBody.toString(),
+    date: new Date().toISOString(),
   });
 
   try {
-    if (!post.title || !post.content) {
+    if (!post.title || !post.content || !post.author || !post.password) {
       res.send(
-        '<script>alert("Please enter both title and content"); window.location="/compose";</script>'
+        '<script>alert("Please enter all the details."); window.location="/compose";</script>'
       );
       return res.render("compose");
     }
@@ -120,6 +126,69 @@ app.post("/compose", async function (req, res) {
     await post.save();
     res.redirect("/");
     console.log("successfully saved");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get("/posts/modify/:postId", async function (req, res) {
+  const requestedPostId = req.params.postId;
+
+  try {
+    const post = await Post.findOne({ _id: requestedPostId });
+
+    res.render("modify", { postId: requestedPostId, post: post });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/modify/:postId", async (req, res) => {
+  const postId = req.params.postId;
+  const updatedTitle = req.body.postTitle;
+  const updatedContent = req.body.postBody;
+  const updatedAuthor = req.body.authorTitle;
+  const password = req.body.passwordBody;
+
+  const post = await Post.findOne({ _id: postId });
+
+  try {
+    if (password === post.password) {
+      const updatedPost = await Post.findOneAndUpdate(
+        { _id: postId },
+        { title: updatedTitle, content: updatedContent, author: updatedAuthor },
+        { new: true }
+      );
+
+      res.redirect(`/posts/${postId}`);
+    } else {
+      res.send(
+        '<script>alert("Password did not match."); window.location="/modify/' +
+          { postId } +
+          '";</script>'
+      );
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+app.get("/posts/delete/:postId", async function (req, res) {
+  const postId = req.params.postId;
+  const enteredPassword = req.query.password;
+  try {
+    const post = await Post.findOne({ _id: postId });
+
+    if (enteredPassword === post.password) {
+      await Post.deleteOne({ _id: postId });
+      return res.redirect("/");
+    } else {
+      return res.send(
+        '<script>alert("Password did not match."); window.location="/posts/' +
+          postId +
+          '";</script>'
+      );
+    }
   } catch (err) {
     console.log(err);
   }

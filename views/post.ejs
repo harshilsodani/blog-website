@@ -1,11 +1,29 @@
 <%- include('partials/header') %>
 
-    <h1>
-        <%= title %>
-    </h1>
+<h1><%= post.title %></h1>
 
-    <div class="content">
-        <%= content %>
-    </div>
+<small><%= post.date %></small>
 
-    <%- include('partials/footer') %>
+<div class="content"><%= post.content %></div>
+
+<small>By: <%= post.author %></small>
+<br />
+<br />
+<a class="btn btn-primary" href="/posts/modify/<%=post.id %>">Edit</a>
+<button class="btn btn-danger" onClick="promptForPassword('<%= post.id %>')">
+  Delete
+</button>
+
+<%- include('partials/footer') %>
+
+<script>
+  function promptForPassword(postId) {
+    const enteredPassword = prompt(
+      "Please enter your password to delete this post:"
+    );
+
+    if (enteredPassword !== null) {
+      window.location.href = `/posts/delete/${postId}?password=${enteredPassword}`;
+    }
+  }
+</script>

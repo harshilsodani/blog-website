@@ -8,7 +8,7 @@
       type="text"
       name="postTitle"
       class="form-control"
-      placeholder="please enter the title here..."
+      placeholder="Title"
     />
 
     <label>Post</label>
@@ -17,12 +17,27 @@
       cols="30"
       rows="8"
       class="form-control"
-      placeholder="please enter the content here..."
+      placeholder="Content"
     ></textarea>
+
+    <label>Author</label>
+    <input
+      type="'text"
+      name="authorTitle"
+      class="form-control"
+      placeholder="Author"
+    />
+
+    <label>Password</label>
+    <input
+      type="text"
+      name="passwordBody"
+      class="form-control"
+      placeholder="Password"
+    />
   </div>
 
   <button class="btn btn-primary" type="submit" name="button">Publish</button>
 </form>
 
-
- <%- include('partials/footer'); %>
+<%- include('partials/footer'); %>
