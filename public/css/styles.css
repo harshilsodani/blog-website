@@ -24,6 +24,12 @@ html {
   white-space: pre-line;
 }
 
+small {
+  display: block;
+  margin-bottom: 20px;
+  color: #888;
+}
+
 .footer-padding {
   padding-bottom: 75px;
 }

@@ -21,7 +21,7 @@ const aboutContent = [
 const contactContent = [
   "We would love to hear from you! Whether you have questions, feedback, or simply want to connect, feel free to reach out using the contact information provided below. Your thoughts and inquiries are important to us, and we strive to respond as promptly as possible.",
 
-  "Email: [email protected]",
+  "Email: abc@email.com",
   "Phone: +1-123-456-7890",
 
   "Please don't hesitate to get in touch with us. We value your engagement and look forward to the opportunity to connect with fellow tech enthusiasts like yourself.",
@@ -38,19 +38,19 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect(
-  "mongodb+srv://" +
-    DB_USERNAME +
-    ":" +
-    DB_PASSWORD +
-    "@cluster0.6dluecf.mongodb.net/blogDB",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+// mongoose.connect(
+//   "mongodb+srv://" +
+//     DB_USERNAME +
+//     ":" +
+//     DB_PASSWORD +
+//     "@cluster0.6dluecf.mongodb.net/blogDB",
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// );
 
-// mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
