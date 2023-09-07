@@ -5,10 +5,11 @@
 <small><%= post.date %></small>
 
 <div class="content"><%= post.content %></div>
+<br />
 
 <small>By: <%= post.author %></small>
 <br />
-<br />
+
 <a class="btn btn-primary" href="/posts/modify/<%=post.id %>">Edit</a>
 <button class="btn btn-danger" onClick="promptForPassword('<%= post.id %>')">
   Delete
