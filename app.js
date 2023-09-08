@@ -163,7 +163,7 @@ app.post("/modify/:postId", async (req, res) => {
       res.redirect(`/posts/${postId}`);
     } else {
       res.send(
-        '<script>alert("Password did not match."); window.location="/modify/' +
+        '<script>alert("Password did not match."); window.location="/posts/modify/' +
           postId +
           '";</script>'
       );
