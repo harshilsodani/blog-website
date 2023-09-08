@@ -20,7 +20,13 @@
   >
 
   <label for="author">Author</label>
-  <textarea id="author" name="authorTitle" class="form-control">
+  <textarea
+    id="author"
+    name="authorTitle"
+    cols="30"
+    rows="8"
+    class="form-control"
+  >
 <%= post.author %></textarea
   >
 
@@ -31,6 +37,8 @@
     class="form-control"
     placeholder="Enter password to modify..."
   ></textarea>
+
+  <br />
 
   <button class="btn btn-primary" type="submit">Save Changes</button>
 </form>
