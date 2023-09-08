@@ -15,18 +15,18 @@
   />
 
   <label for="content">Content</label>
-  <textarea id="content" name="postBody" class="form-control">
-<%= post.content %></textarea
-  >
-
-  <label for="author">Author</label>
   <textarea
-    id="author"
-    name="authorTitle"
+    id="content"
+    name="postBody"
     cols="30"
     rows="8"
     class="form-control"
   >
+<%= post.content %></textarea
+  >
+
+  <label for="author">Author</label>
+  <textarea id="author" name="authorTitle" class="form-control">
 <%= post.author %></textarea
   >
 
