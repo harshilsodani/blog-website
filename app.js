@@ -57,7 +57,7 @@ const postSchema = new mongoose.Schema({
   content: { type: String, required: true },
   author: { type: String, required: true },
   password: { type: String, required: true },
-  date: { type: Date, default: Date.now },
+  postDate: { type: Date, default: Date.now },
 });
 
 const Post = mongoose.model("Post", postSchema);
@@ -112,7 +112,7 @@ app.post("/compose", async function (req, res) {
     content: req.body.postBody,
     author: req.body.authorTitle,
     password: req.body.passwordBody.toString(),
-    date: new Date().toISOString(),
+    postDate: new Date().toISOString(),
   });
 
   try {
@@ -154,9 +154,14 @@ app.post("/modify/:postId", async (req, res) => {
 
   try {
     if (password === post.password) {
-      const updatedPost = await Post.findOneAndUpdate(
+      await Post.findOneAndUpdate(
         { _id: postId },
-        { title: updatedTitle, content: updatedContent, author: updatedAuthor },
+        {
+          title: updatedTitle,
+          content: updatedContent,
+          author: updatedAuthor,
+          postDate: new Date(),
+        },
         { new: true }
       );
 
