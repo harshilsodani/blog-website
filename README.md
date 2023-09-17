@@ -101,6 +101,7 @@ Contributions to Digivarta are welcome! Whether you want to report a bug, sugges
 3.**Make your changes and commit them:**
   ```bash
   git commit -m "Add your meaningful commit message here"
+  ```
 
 4.**Push your changes to your fork:**
   ```bash
@@ -110,6 +111,8 @@ Contributions to Digivarta are welcome! Whether you want to report a bug, sugges
 5.**Create a pull request to the main repository from your fork.**
 
 6.**Be open to feedback and iterate on your contribution.**
+
+
 
 **Thank you for contributing to Digivarta! Together, we can make it even better.**
 
