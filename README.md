@@ -40,9 +40,9 @@ Below is the structure of your Digivarta project:
 
      - **partials**: This subdirectory contains partial EJS templates that can be reused across multiple pages for consistency. Examples include the header and footer.
 
-     - **footer.ejs**: The template for the website's footer section.
+          - **footer.ejs**: The template for the website's footer section.
 
-   - **header.ejs**: The template for the website's header section.
+          - **header.ejs**: The template for the website's header section.
 
    - **about.ejs**: The template for the "About" page.
 
