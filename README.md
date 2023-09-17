@@ -6,7 +6,7 @@ Digivarta is a versatile technology blog website that empowers users to create a
 
 ### 1. Create Technology Blogs
 - **Author Your Insights**: Share your knowledge and insights about technology trends, programming, and more.
-- **Rich Content**: Create content with formatted text, images, and code snippets.
+- **Rich Content**: Create content with formatted text (images, and code snippets will be added in future versions).
 
 ### 2. Secure Editing and Deletion
 - **Password Protection**: Assign a password to each blog post for authorization when editing or deleting.
@@ -18,7 +18,6 @@ Digivarta is a versatile technology blog website that empowers users to create a
 
 ### 4. Dynamic Content
 - **Live Updates**: Dynamic rendering of content using EJS templates.
-- **Real-Time Interaction**: Engage with readers through comments and updates.
 
 ## Technologies Used
 
@@ -39,9 +38,9 @@ Below is the structure of your Digivarta project:
 
 - **views**: Contains the EJS templates used for rendering HTML pages. Here's a breakdown of the templates:
 
-   - **partials**: This subdirectory contains partial EJS templates that can be reused across multiple pages for consistency. Examples include the header and footer.
+     - **partials**: This subdirectory contains partial EJS templates that can be reused across multiple pages for consistency. Examples include the header and footer.
 
-   - **footer.ejs**: The template for the website's footer section.
+     - **footer.ejs**: The template for the website's footer section.
 
    - **header.ejs**: The template for the website's header section.
 
@@ -74,20 +73,26 @@ This structured layout helps keep your project organized, with clear separation 
 To explore Digivarta and start creating technology blogs, follow these steps:
 
 1. Clone the repository:
+```bash
 git clone https://github.com/harshilsodani/blog-website.git
+```
 
 
-2. Install dependencies:
+3. Install dependencies:
+```bash
 npm install
+```
 
 
-3. Set up environment variables for database connection and other configurations.
+5. Set up environment variables for database connection and other configurations.
 
-4. Start the server:
+6. Start the server:
+```bash
 npm start
+```
 
 
-5. Access the website in your browser: `http://localhost:3000`
+8. Access the website in your browser: `http://localhost:3000`
 
 ## Contributing
 
