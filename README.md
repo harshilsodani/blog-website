@@ -97,6 +97,7 @@ Contributions to Digivarta are welcome! Whether you want to report a bug, sugges
 2. **Create a new branch for your feature or bug fix:**
    ```bash
    git checkout -b feature/your-feature-name
+   ```
 
 3.**Make your changes and commit them:**
   ```bash
