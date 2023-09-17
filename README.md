@@ -73,30 +73,46 @@ This structured layout helps keep your project organized, with clear separation 
 To explore Digivarta and start creating technology blogs, follow these steps:
 
 1. Clone the repository:
-```bash
-git clone https://github.com/harshilsodani/blog-website.git
-```
+   ```bash
+   git clone https://github.com/harshilsodani/blog-website.git
 
+2. Install dependencies:
+   ```bash
+    npm install
+     
+3. Set up environment variables for database connection and other configurations.
 
-3. Install dependencies:
-```bash
-npm install
-```
+4. Start the server:
+   ```bash
+    npm start
 
-
-5. Set up environment variables for database connection and other configurations.
-
-6. Start the server:
-```bash
-npm start
-```
-
-
-8. Access the website in your browser: `http://localhost:3000`
+5. Access the website in your browser: `http://localhost:3000`
 
 ## Contributing
 
-Contributions to Digivarta are welcome! If you'd like to contribute, please follow the guidelines in the project's [CONTRIBUTING.md](CONTRIBUTING.md) file.
+Contributions to Digivarta are welcome! Whether you want to report a bug, suggest an enhancement, or contribute code, please follow these guidelines:
+
+1. **Fork the repository.**
+
+2. **Create a new branch for your feature or bug fix:**
+   ```bash
+   git checkout -b feature/your-feature-name
+
+3.**Make your changes and commit them:**
+  ```bash
+  git commit -m "Add your meaningful commit message here"
+
+4.**Push your changes to your fork:**
+  ```bash
+  git push origin feature/your-feature-name
+  ```
+
+5.**Create a pull request to the main repository from your fork.**
+
+6.**Be open to feedback and iterate on your contribution.**
+
+**Thank you for contributing to Digivarta! Together, we can make it even better.**
+
 
 ## License
 
